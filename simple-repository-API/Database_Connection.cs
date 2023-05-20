@@ -16,9 +16,10 @@ namespace simple_repository_API
                    @"Server = Laptop-SS4D3ECJ\SQLEXPRESS; Database = school; Trusted_Connection = True;"))
             {
                 connection.Open();
-                string queryString = "SELECT ID_Student,Name,Surname,Age FROM Student";
+                string queryString = "SELECT ID_Student,Name,Surname,Age FROM Student WHERE ID_Student = 1";
                 SqlCommand command = new SqlCommand(queryString, connection);
                 SqlDataReader reader = command.ExecuteReader();
+
 
                 while (reader.Read())
                 {

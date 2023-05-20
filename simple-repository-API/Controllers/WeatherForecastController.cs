@@ -30,7 +30,7 @@ namespace simple_repository_API.Controllers
             .ToArray();
         }
         [HttpGet("obojetnie")]
-        public List<Student> Get2([FromBody] Student dupa)
+        public List<Student> Get2([FromQuery] int Id_Student)
         {
             return database_Connection.Database_connect();
         }
