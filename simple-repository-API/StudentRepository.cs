@@ -6,36 +6,34 @@ using Microsoft.AspNetCore.Http;
 namespace simple_repository_API
 
 {
-    public class Database_Connection
+    public class StudentRepository
     {
-        public List<Student> Database_connect() 
+        public Student GetStudent(int id) 
         {
-            List <Student> students = new List <Student>();
-
+            Student student = new Student();
             using (SqlConnection connection = new SqlConnection(
                    @"Server = Laptop-SS4D3ECJ\SQLEXPRESS; Database = school; Trusted_Connection = True;"))
             {
                 connection.Open();
-                string queryString = "SELECT ID_Student,Name,Surname,Age FROM Student WHERE ID_Student = 1";
-                SqlCommand command = new SqlCommand(queryString, connection);
+                string query = "SELECT Id_Student,Name,Surname,Age FROM Student WHERE Id_Student = @Id_Student";
+                SqlCommand command = new SqlCommand(query, connection);
+             
                 SqlDataReader reader = command.ExecuteReader();
 
-
-                while (reader.Read())
+                while(reader.Read())
                 {
-                    Student student = new Student();
-                    student.ID_Student = reader.GetInt32(0);
-                    student.Name = reader.GetString(1);
-                    student.Surname = reader.GetString(2);
-                    student.Age = reader.GetInt32(3);
-
-                    students.Add(student);
+                    student = new Student()
+                    {
+                        Id_Student = reader.GetInt32(0),
+                        Name = reader.GetString(1),
+                        Surname = reader.GetString(2),
+                        Age = reader.GetInt32(3)
+                    };           
                 }
-                reader.Close();
             }
-            return students;
-
+            return student;
         }
+
         public void Database_Insert(Student student)
         {
             
@@ -46,7 +44,7 @@ namespace simple_repository_API
                 var sql = "INSERT INTO Student (ID_Student, Name, Surname, Age) VALUES (@ID_Student, @Name, @Surname, @Age)";
 
                 SqlCommand command = new SqlCommand(sql, connection);
-                command.Parameters.AddWithValue("@ID_Student", student.ID_Student);
+                command.Parameters.AddWithValue("@ID_Student", student.Id_Student);
                 command.Parameters.AddWithValue("@Name", student.Name);
                 command.Parameters.AddWithValue("@Surname", student.Surname);
                 command.Parameters.AddWithValue("@Age", student.Age);

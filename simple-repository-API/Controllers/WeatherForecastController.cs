@@ -18,34 +18,23 @@ namespace simple_repository_API.Controllers
             _logger = logger;
         }
 
-        [HttpGet("dejMniecOs")]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpGet("Student")]
+        public Student GetStudent(int id)
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
-        [HttpGet("obojetnie")]
-        public List<Student> Get2([FromQuery] int Id_Student)
-        {
-            return database_Connection.Database_connect();
+            return studentRepository.GetStudent(id);
         }
          
-        Database_Connection database_Connection = new Database_Connection();
+        StudentRepository studentRepository = new StudentRepository();
         [HttpPost("DajMnieUsera")]
         public IActionResult AddData([FromHeader] Student dupa)
         {
-            database_Connection.Database_Insert(dupa);
+            studentRepository.Database_Insert(dupa);
             return Ok();
         }
         [HttpDelete("dupa")]
         public IActionResult Database_Delete(int studentId)
         {
-            database_Connection.Database_Delete(studentId);
+            studentRepository.Database_Delete(studentId);
             return RedirectToAction("Index");
         }
 
