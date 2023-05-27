@@ -17,12 +17,6 @@ namespace simple_repository_API.Controllers
         {
             _logger = logger;
         }
-
-        [HttpGet("Student")]
-        public Student GetStudent(int id)
-        {
-            return studentRepository.GetStudent(id);
-        }
          
         StudentRepository studentRepository = new StudentRepository();
         [HttpPost("DajMnieUsera")]
