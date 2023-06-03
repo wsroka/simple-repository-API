@@ -1,42 +1,46 @@
 ﻿using simple_repository_API.Models;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using Microsoft.AspNetCore.Http;
 
 namespace simple_repository_API
-
 {
     public class StudentRepository
     {
-        public Student GetStudent(int id) 
+        private readonly SqlConnection _connection;
+
+        public StudentRepository()
+        {
+            _connection = new SqlConnection(
+                   @"Server = Laptop-SS4D3ECJ\SQLEXPRESS; Database = school; Trusted_Connection = True;");
+        }
+
+        public Student GetStudent(int id)
         {
             Student student = new Student();
-            using (SqlConnection connection = new SqlConnection(
-                   @"Server = Laptop-SS4D3ECJ\SQLEXPRESS; Database = school; Trusted_Connection = True;"))
-            {
-                connection.Open();
-                string query = "SELECT Id_Student,Name,Surname,Age FROM Student WHERE Id_Student = @Id";
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Id",id);
-                SqlDataReader reader = command.ExecuteReader();
 
-                while(reader.Read())
+            _connection.Open();
+            string query = "SELECT Id_Student,Name,Surname,Age FROM Student WHERE Id_Student = @Id";
+            var command = new SqlCommand(query, _connection);
+            command.Parameters.AddWithValue("@Id", id);
+
+            var reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                student = new Student()
                 {
-                    student = new Student()
-                    {
-                        Id = reader.GetInt32(0),
-                        Name = reader.GetString(1),
-                        Surname = reader.GetString(2),
-                        Age = reader.GetInt32(3)
-                    };           
-                }
+                    Id = reader.GetInt32(0),
+                    Name = reader.GetString(1),
+                    Surname = reader.GetString(2),
+                    Age = reader.GetInt32(3)
+                };
             }
+
             return student;
         }
 
         public void Database_Insert(Student student)
         {
-            
+
             using (SqlConnection connection = new SqlConnection(
                @"Server = Laptop-SS4D3ECJ\SQLEXPRESS; Database = school; Trusted_Connection = True;"))
             {
