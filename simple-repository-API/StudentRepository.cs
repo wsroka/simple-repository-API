@@ -38,9 +38,9 @@ namespace simple_repository_API
             return student;
         }
   
-        public List <Student> GetStudentsList()
+        public List<Student> GetStudents()
         {
-            List <Student> students = new List<Student>();
+            List<Student> students = new List<Student>();
 
             _connection.Open();
             string query = "SELECT Id_Student,Name,Surname,Age FROM Student";

@@ -18,10 +18,10 @@ namespace simple_repository_API.Controllers
             return _studentRepository.GetStudent(id);
         }
 
-        [HttpPost("StudentsList")]
-        public List <Student> GetStudentsLists()
+        [HttpPost("GetStudents")]
+        public List<Student> GetStudents()
         {
-            return _studentRepository.GetStudentsList();
+            return _studentRepository.GetStudents();
         }
     }
 }
