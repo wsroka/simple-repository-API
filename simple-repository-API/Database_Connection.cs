@@ -35,6 +35,32 @@ namespace simple_repository_API
             return students;
 
         }
+        public List <Student> GetStudentsList()
+        {
+            List <Student> students = new List<Student>();
+
+            _connection.Open();
+            string query = "SELECT Id_Student,Name,Surname,Age FROM Student";
+            var command = new SqlCommand(query, _connection);
+
+            var reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                 var student = new Student
+                {
+                    Id = reader.GetInt32(0),
+                    Name = reader.GetString(1),
+                    Surname = reader.GetString(2),
+                    Age = reader.GetInt32(3)
+                };
+                students.Add(student);
+            }
+            _connection.Close();
+
+            return students;
+        }
+
         public void Database_Insert(Student student)
         {
             
