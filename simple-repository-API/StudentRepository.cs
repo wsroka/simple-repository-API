@@ -37,8 +37,7 @@ namespace simple_repository_API
 
             return student;
         }
-
-        }
+  
         public List <Student> GetStudentsList()
         {
             List <Student> students = new List<Student>();
