@@ -17,5 +17,11 @@ namespace simple_repository_API.Controllers
         {          
             return _studentRepository.GetStudent(id);
         }
+
+        [HttpPost("GetStudents")]
+        public List<Student> GetStudents()
+        {
+            return _studentRepository.GetStudents();
+        }
     }
 }
