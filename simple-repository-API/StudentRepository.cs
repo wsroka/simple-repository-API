@@ -15,7 +15,7 @@ namespace simple_repository_API
 
         public Student GetStudent(int id)
         {
-            Student student = new Student();
+            var student = new Student();
 
             _connection.Open();
             string query = "SELECT Id_Student,Name,Surname,Age FROM Student WHERE Id_Student = @Id";
@@ -37,7 +37,7 @@ namespace simple_repository_API
 
             return student;
         }
-  
+
         public List<Student> GetStudents()
         {
             List<Student> students = new List<Student>();
@@ -50,7 +50,7 @@ namespace simple_repository_API
 
             while (reader.Read())
             {
-                 var student = new Student
+                var student = new Student
                 {
                     Id = reader.GetInt32(0),
                     Name = reader.GetString(1),
@@ -81,18 +81,16 @@ namespace simple_repository_API
                 command.ExecuteNonQuery();
             }
         }
-        public void Database_Delete(int studentId)
+        public void DeleteStudent(int id)
         {
-            using (SqlConnection connection = new SqlConnection(
-               @"Server = Laptop-SS4D3ECJ\SQLEXPRESS; Database = school; Trusted_Connection = True;"))
-            {
-                connection.Open();
-                var sqlDelete = "DELETE FROM Student WHERE ID_Student = @ID_Student";
+            _connection.Open();
+            var query = "DELETE FROM Student WHERE ID_Student = @ID";
+            var command = new SqlCommand(query, _connection);
+            command.Parameters.AddWithValue("@ID", id);
+            
+            command.ExecuteNonQuery();
 
-                SqlCommand command = new SqlCommand(sqlDelete, connection);
-                command.Parameters.AddWithValue("@ID_Student", studentId);
-                command.ExecuteNonQuery();
-            }
+            _connection.Close();
         }
 
     }

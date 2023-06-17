@@ -14,7 +14,7 @@ namespace simple_repository_API.Controllers
 
         [HttpGet("Student")]
         public Student GetStudent(int id)
-        {          
+        {
             return _studentRepository.GetStudent(id);
         }
 
@@ -22,6 +22,12 @@ namespace simple_repository_API.Controllers
         public List<Student> GetStudents()
         {
             return _studentRepository.GetStudents();
+        }
+
+        [HttpDelete("DeleteStudent")]
+        public void DeleteStudent(int id)
+        {
+            _studentRepository.DeleteStudent(id);
         }
     }
 }
