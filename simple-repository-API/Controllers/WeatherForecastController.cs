@@ -25,12 +25,6 @@ namespace simple_repository_API.Controllers
             studentRepository.Database_Insert(dupa);
             return Ok();
         }
-        [HttpDelete("dupa")]
-        public IActionResult Database_Delete(int studentId)
-        {
-            studentRepository.Database_Delete(studentId);
-            return RedirectToAction("Index");
-        }
 
     }
 }
