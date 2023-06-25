@@ -14,7 +14,7 @@ namespace simple_repository_API.Controllers
 
         [HttpGet("Student")]
         public Student GetStudent(int id)
-        {          
+        {
             return _studentRepository.GetStudent(id);
         }
 

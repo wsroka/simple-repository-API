@@ -19,6 +19,7 @@ namespace simple_repository_API
             parameters["@Id"] = id;
             var reader = ExecuteSql("SELECT Id_Student,Name,Surname,Age FROM Student WHERE Id_Student = @Id", parameters);
 
+
             /*  _connection.Open();
               string query = "SELECT Id_Student,Name,Surname,Age FROM Student WHERE Id_Student = @Id";
               var command = new SqlCommand(query, _connection);
@@ -39,7 +40,7 @@ namespace simple_repository_API
 
             return student;
         }
-  
+
         public List<Student> GetStudents()
         {
             List<Student> students = new List<Student>();
@@ -52,7 +53,7 @@ namespace simple_repository_API
 
             while (reader.Read())
             {
-                 var student = new Student
+                var student = new Student
                 {
                     Id = reader.GetInt32(0),
                     Name = reader.GetString(1),
@@ -93,7 +94,6 @@ namespace simple_repository_API
             var query = "DELETE FROM Student WHERE ID_Student = @ID";
             var command = new SqlCommand(query, _connection);
             command.Parameters.AddWithValue("@ID", id);
-
             command.ExecuteNonQuery();
 
             _connection.Close();
