@@ -74,7 +74,7 @@ namespace simple_repository_API
             parameters["@Name"] = student.Name;
             parameters["@Surname"] = student.Surname;
             parameters["@Age"] = student.Age;
-            var reader = ExecuteSql("INSERT INTO Student (ID_Student, Name, Surname, Age) VALUES (@Id, @Name, @Surname, @Age)", parameters);
+            ExecuteSql("INSERT INTO Student (ID_Student, Name, Surname, Age) VALUES (@Id, @Name, @Surname, @Age)", parameters);
 
             //_connection.Open();
             //var sql = "INSERT INTO Student (ID_Student, Name, Surname, Age) VALUES (@Id, @Name, @Surname, @Age)";
@@ -87,7 +87,7 @@ namespace simple_repository_API
             //command.Parameters.AddWithValue("@Age", student.Age);
             //command.ExecuteNonQuery();
         }
-        public void Database_Delete(int studentId)
+        public void DeleteStudent(int id)
         {
             _connection.Open();
             var query = "DELETE FROM Student WHERE ID_Student = @ID";
