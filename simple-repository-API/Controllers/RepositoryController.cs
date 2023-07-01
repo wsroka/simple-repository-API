@@ -34,5 +34,10 @@ namespace simple_repository_API.Controllers
         {
             _studentRepository.InsertStudent(student);
         }
+        [HttpPost("UpdateStudent")]
+        public void UpdateStudent(Student student)
+        {
+            _studentRepository.UdateStudent(student);
+        }
     }
 }
