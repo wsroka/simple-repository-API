@@ -17,14 +17,4 @@ namespace simple_repository_API.Controllers
         {
             _logger = logger;
         }
-         
-        StudentRepository studentRepository = new StudentRepository();
-        [HttpPost("DajMnieUsera")]
-        public IActionResult AddData([FromHeader] Student dupa)
-        {
-            studentRepository.Database_Insert(dupa);
-            return Ok();
-        }
-
-    }
 }
