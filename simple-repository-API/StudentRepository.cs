@@ -19,14 +19,6 @@ namespace simple_repository_API
             parameters["@Id"] = id;
             var reader = ExecuteSql("SELECT Id_Student,Name,Surname,Age FROM Student WHERE Id_Student = @Id", parameters);
 
-
-            /*  _connection.Open();
-              string query = "SELECT Id_Student,Name,Surname,Age FROM Student WHERE Id_Student = @Id";
-              var command = new SqlCommand(query, _connection);
-              command.Parameters.AddWithValue("@Id", id);
-
-              var reader = command.ExecuteReader();*/
-
             while (reader.Read())
             {
                 student = new Student()
@@ -69,24 +61,14 @@ namespace simple_repository_API
 
         public void InsertStudent(Student student)
         {
-            var parameters = new Dictionary<string, object>();
-
-            parameters["@Id"] = student.Id;
-            parameters["@Name"] = student.Name;
-            parameters["@Surname"] = student.Surname;
-            parameters["@Age"] = student.Age;
+            var parameters = new Dictionary<string, object>()
+            {
+                { "@Id", student.Id },
+                { "@Name", student.Name},
+                { "@Surname", student.Surname},
+                { "@Age", student.Age}
+            };
             ExecuteSql("INSERT INTO Student (ID_Student, Name, Surname, Age) VALUES (@Id, @Name, @Surname, @Age)", parameters);
-
-            //_connection.Open();
-            //var sql = "INSERT INTO Student (ID_Student, Name, Surname, Age) VALUES (@Id, @Name, @Surname, @Age)";
-
-            //SqlCommand command = new SqlCommand(sql, _connection);
-
-            //command.Parameters.AddWithValue("@ID_Student", student.Id);
-            //command.Parameters.AddWithValue("@Name", student.Name);
-            //command.Parameters.AddWithValue("@Surname", student.Surname);
-            //command.Parameters.AddWithValue("@Age", student.Age);
-            //command.ExecuteNonQuery();
         }
         public void DeleteStudent(int id)
         {
