@@ -80,6 +80,18 @@ namespace simple_repository_API
 
             _connection.Close();
         }
+
+        public void UdateStudent(Student student)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "@Id", student.Id },
+                { "@Name", student.Name},
+                { "@Surname", student.Surname},
+                { "@Age", student.Age}
+            };
+            ExecuteSql("Update Student SET Name = @Name, Surname = @Surname, Age = @Age WHERE ID_Student = @Id", parameters);
+        }
         private SqlDataReader ExecuteSql(string sql, Dictionary<string, object> parameters)
         {
             _connection.Open();
