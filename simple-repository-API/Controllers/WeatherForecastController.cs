@@ -17,4 +17,5 @@ namespace simple_repository_API.Controllers
         {
             _logger = logger;
         }
+    }
 }
