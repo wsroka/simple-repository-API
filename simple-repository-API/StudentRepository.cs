@@ -1,6 +1,6 @@
-﻿using simple_repository_API.Models;
+﻿using Dapper;
+using simple_repository_API.Models;
 using System.Data.SqlClient;
-using Dapper;
 
 
 namespace simple_repository_API
