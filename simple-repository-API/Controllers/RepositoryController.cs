@@ -5,11 +5,11 @@ namespace simple_repository_API.Controllers
 {
     public class RepositoryController : ControllerBase
     {
-        private readonly StudentRepository _studentRepository;
+        private readonly IStudentRepository _studentRepository;
 
-        public RepositoryController()
+        public RepositoryController(IStudentRepository studentRepository)
         {
-            _studentRepository = new StudentRepository();
+            _studentRepository = studentRepository;
         }
 
         [HttpGet("Student")]
@@ -37,7 +37,7 @@ namespace simple_repository_API.Controllers
         [HttpPost("UpdateStudent")]
         public void UpdateStudent(Student student)
         {
-            _studentRepository.UdateStudent(student);
+            _studentRepository.UpdateStudent(student);
         }
     }
 }

@@ -2,10 +2,11 @@
 using simple_repository_API.Models;
 using System.Data.SqlClient;
 
+
 namespace simple_repository_API
 {
-    public class StudentRepository
-    {
+    public class StudentRepository : IStudentRepository
+    { 
         private readonly SqlConnection _connection;
 
         public StudentRepository()
@@ -21,6 +22,6 @@ namespace simple_repository_API
 
         public void DeleteStudent(int id) => _connection.Execute("DELETE FROM Student WHERE ID_Student = @Id", new { @Id = id });
 
-        public void UdateStudent(Student student) => _connection.Execute("Update Student SET Name = @Name, Surname = @Surname, Age = @Age WHERE ID_Student = @Id", student);
+        public void UpdateStudent(Student student) => _connection.Execute("Update Student SET Name = @Name, Surname = @Surname, Age = @Age WHERE ID_Student = @Id", student);
     }
 }
