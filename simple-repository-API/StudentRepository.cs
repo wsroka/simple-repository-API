@@ -11,8 +11,7 @@ namespace simple_repository_API
 
         public StudentRepository()
         {
-            _connection = new SqlConnection(
-                   @"Server = Laptop-SS4D3ECJ\SQLEXPRESS; Database = school; Trusted_Connection = True;");
+            _connection = new SqlConnection(DBConfiguration.ConnectionString);
         }
         public Student GetStudent(int id) => _connection.QuerySingle<Student>("SELECT ID_Student,Name,Surname,Age FROM Student WHERE ID_Student = @Id", new { @Id = id });
 
@@ -23,5 +22,6 @@ namespace simple_repository_API
         public void DeleteStudent(int id) => _connection.Execute("DELETE FROM Student WHERE ID_Student = @Id", new { @Id = id });
 
         public void UpdateStudent(Student student) => _connection.Execute("Update Student SET Name = @Name, Surname = @Surname, Age = @Age WHERE ID_Student = @Id", student);
+
     }
 }

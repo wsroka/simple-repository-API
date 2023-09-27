@@ -1,10 +1,15 @@
 using simple_repository_API;
+using simple_repository_API.Models;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+
+        builder.Services.AddControllersWithViews();
+
+        DBConfiguration.ConnectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
 
         // Add services to the container.
 
